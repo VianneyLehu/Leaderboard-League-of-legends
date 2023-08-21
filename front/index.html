@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec un tableau Bootstrap</title>
+    <!-- Inclusion des fichiers CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>LEAGUE OF LEGENDS LEADERBOARD</h1>
+        <table id="leaderboard">
+            <tr>
+                <th>Name</th>
+                <th>Tier</th>
+                <th>Rank</th>
+                <th>LP</th>
+                <th>Wins</th>
+                <th>Losses</th>
+            </tr>
+        </table>
+    </div>
+
+   <script>
+
+
+
+    function fetchData(){
+
+        fetch('/leaderboard', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            console.log(data);
+            let tableHtml
+
+            data.forEach(entry => {
+                tableHtml += `
+                    <tr>
+                        <td>${entry.name}</td>
+                        <td>${entry.tier}</td>
+                        <td>${entry.rank}</td>
+                        <td>${entry.lp}</td>
+                        <td>${entry.wins}</td>
+                        <td>${entry.losses}</td>
+                    </tr>`;
+            });
+            document.getElementById('leaderboard').innerHTML += tableHtml;
+    
+            console.log(data)
+
+        })
+        
+    }
+
+    fetchData()
+
+
+    </script>
+ 
+
+
+</body>
+</html>
