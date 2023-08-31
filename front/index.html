@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec un tableau Bootstrap</title>
+    <!-- Inclusion des fichiers CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container mt-5 center-table">
+        <table table class="table table-hover table-dark" id="leaderboard">
+            <thead>
+                <tr>
+                    <th  scope="col">Name</th>
+                    <th  scope="col">Tier</th>
+                    <th  scope="col">Rank</th>
+                    <th  scope="col">LP</th>
+                    <th  scope="col">Wins</th>
+                    <th  scope="col">Losses</th>
+                    <th  scope="col">Winrate</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</body>
+
+   <script>
+
+
+    function fetchData(){
+
+        fetch('/leaderboard', {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            console.log(data);
+            let tableHtml = '<tbody>'
+
+            data.forEach(entry => {
+                tableHtml += `
+                    <tr onclick="redirect('${entry.name}')">
+                            <td>${entry.name}</td>
+                            <td>${entry.tier}</td>
+                            <td>${entry.rank}</td>
+                            <td>${entry.lp}</td>
+                            <td>${entry.wins}</td>
+                            <td>${entry.losses}</td>
+                            <td>${entry.winrate.toFixed(1)}</td>
+                    </tr>`;
+            });
+            document.getElementById('leaderboard').innerHTML += tableHtml + '</tbody>';
+    
+        })
+        
+    }
+
+    fetchData()
+
+    function redirect(name){
+        window.location.href = `/profil/${name}`
+
+    }
+
+
+    </script>
+ 
+</html>

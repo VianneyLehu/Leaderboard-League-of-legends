@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page avec un tableau Bootstrap</title>
+    <!-- Inclusion des fichiers CSS de Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container mt-5 center-table">
+        <table table class="table table-hover table-dark" id="leaderboard">
+            <thead>
+            </thead>
+        </table>
+    </div>
+</body>
+
+   <script>
+
+
+
+
+    const url = decodeURIComponent(window.location)
+
+    const pathParts = url.split('/');
+
+    const username = pathParts[pathParts.length - 1];
+
+    const data = {
+        username: username
+    };
+
+    function fetchData(){
+
+        fetch('/profil', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) 
+            })
+            .then(response => response.json())
+            .then(data => {
+
+                console.log(data)
+
+
+                let tableHtml = '<tbody>'
+
+                data.forEach(match => {
+
+                    console.log(match)
+
+                    match.forEach(entry =>{
+
+
+                        tableHtml += `
+                            <tr>
+                                    <td>${entry.username}</td>
+                                    <td>${entry.champion}</td>
+                                    <td>${entry.kills}</td>
+                                    <td>${entry.deaths}</td>
+                                    <td>${entry.assists}</td>
+                                    <td>${entry.item0}</td>
+                                    <td>${entry.item1}</td>
+                                    <td>${entry.item2}</td>
+                                    <td>${entry.item3}</td>
+                                    <td>${entry.item4}</td>
+                                    <td>${entry.item5}</td>
+                                    <td>${entry.item6}</td>
+                                    <td>${entry.summoner1Id}</td>
+                                    <td>${entry.summoner2Id}</td>
+                                    <td>${entry.lane}</td>
+                                
+                            </tr>`;
+
+
+                        tableHtml +=`
+                                
+                        `
+                        
+
+
+                    });            
+
+                });
+
+                document.getElementById('leaderboard').innerHTML += tableHtml;
+
+                document.getElementById('leaderboard').innerHTML += '</tbody>'
+                
+           
+            })
+            .catch(error => {
+            console.error('Error:', error);
+        });
+
+
+    }
+
+
+
+    fetchData()
+
+
+    </script>
+ 
+</html>

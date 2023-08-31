@@ -1,0 +1,14 @@
+
+body{
+    background-image: url('bg2.jpg'); /* Replace with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+}
+
+
+.center-table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* This will vertically center the container */
+}

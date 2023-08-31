@@ -1,0 +1,60 @@
+/*
+
+body{
+    height: 100vh;
+    width: 100vw;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.container{
+    display:flex;
+    align-items: center;                                                    
+    justify-content: space-around;
+    flex-direction: column;
+    height: 500px;
+    width: 350px;
+    border:1px solid black;
+    border-radius: 10px;
+
+}
+
+
+.container input{
+    outline: none;
+    border:none
+}
+
+
+.input-wrapper{
+    position: relative;
+    padding: 10px;
+    border-bottom: 1px solid #aaa;
+}
+
+
+.image-container {
+    position: relative;
+    display: inline-flex; 
+    align-items: center;
+    justify-content: center;
+}
+
+.profil{
+    border-radius: 50%;
+}
+
+.image-wrapper {
+    position: absolute;
+   
+}
+
+.aligned-image {
+    width: auto;
+    height: auto;
+}
+
+*/
